@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Route Mapper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="jumbotron bg-dark text-white py-2" id="jumbo">
+        <h1 class="text-center">Route Mapper</h1>
+    </div>
+
+    <!-- Side Bar -->
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light" id="sidebar-wrapper">
+            <div class="sidebar-heading mx-2">
+                Search for a City:
+            </div>
+            <div class="form-inline">
+                <form class="example mb-3 mx-2">
+                    <input type="text" class="form-control" id="city-search"></textarea>
+                    <button type="submit" id="find-city" class="btn btn-primary py-2"><i
+                            class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div class="list-group list-group-flush border" id="city-name">
+            </div>
+        </div>
+
+        <!-- Daily Forecast -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid m-4 p-2 border">
+                <h2 class="mt-4 mx-2" id="city-info"></h2>
+                <p id="weatherInfo"></p>
+            </div>
+
+            <!-- 5 Day Forecast -->
+            <div class="container-fluid m-4 p-2" id="forecast"></div>
+            <h2 class="mt-4 mx-4" id="forecast-title"></h2>
+            <div class="row m-2" id="forecast-data"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("loaded");
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log(position.coords.latitude, position.coords.longitude);
+            });
+        });
+
+    </script>
