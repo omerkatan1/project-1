@@ -1,0 +1,15 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#myMap {
+    height: 100%;
+}
+#pageContent {
+    float: left;
+    background-color: lightgray;
+    height: 100%;
+    width: 400px;
+}
