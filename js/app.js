@@ -3,7 +3,11 @@ $(document).ready(function () {
     $('body').css('display', 'none').fadeIn(1000);
 })
 
-$(document).on("click", "#goBtn", displayMapContent);
+$("#goBtn").on("click", function (event) {
+    event.preventDefault();
+    displayMapContent();
+    getWeatherInfo("seattle");
+});
 
 function displayMapContent() {
     $(".grid-container").empty();
