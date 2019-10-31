@@ -16,31 +16,65 @@
         crossorigin=""></script>
 
     <!-- style css link -->
-    <link rel="stylesheet" href="Assets/mapstyle.css">
+    <link rel="stylesheet" href="Assets/css/mapstyle.css" />
 
     <!-- jQuery link -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <!-- leaflet css routing library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css">
-    <link rel="stylesheet" href="Assets/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="Assets/css/leaflet-routing-machine.css" />
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="Assets/css/foundation.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+
 </head>
 
 <body>
+        <div class="grid-container">
+                <div class="grid-x grid-padding-x">
+                  <div class="large-12 cell">
+                    <img id="logo"
+                      src="Assets/Images/logo.png">
+                  </div>
+                </div>
+            
+                <hr />
+            
+                <h5>Enter Destination</h5>
+                <form>
+                  <div class="grid-x grid-padding-x">
+                    <div class="large-12 cell">
+                      <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
+                      <a role="button" aria-label="submit form" href="#" id="goBtn" class="button round">Go</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div id="myMap" class="map"></div>
+              <div class="weatherInfo"></div>
 
 
-    <div id="pageContent">
-        <h1>Page Content</h1>
+
+    <!-- <div id="pageContent">
+        <h1>Weather</h1>
     </div>
-    <div id="myMap" class="map"></div>
+    <div id="myMap" class="map"></div> -->
 
     <!-- leaflet js routing library -->
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <script src="Assets/leaflet-routing-machine.js"></script>
-
+    <script src="Assets/app.js"></script>
+  <script src="Assets/cameras.js"></script>
+  <script src="Assets/displayWeather.js"></script>
+  <script src="Assets/leaflet-routing-machine.js"></script>
+  <script src="Assets/startingLocation.js"></script>
 
     <script>
-        $(document).ready(function () {
+        function loadMap () {
+            $(".grid-container").empty();
             console.log("loaded");
             navigator.geolocation.getCurrentPosition(function (position) {
                 console.log(position.coords.latitude, position.coords.longitude);
@@ -67,7 +101,7 @@
                 }).addTo(mapStartVeiw);
 
             });
-        });
+        }
     </script>
 </body>
 

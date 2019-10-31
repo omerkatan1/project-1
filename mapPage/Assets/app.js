@@ -5,7 +5,8 @@ $(document).ready(function () {
 
 $("#goBtn").on("click", function (event) {
     event.preventDefault();
-    displayMapContent();
+    loadMap();
+    // var city = $("#destination").val();
     getWeatherInfo("seattle");
 });
 
