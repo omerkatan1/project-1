@@ -1,12 +1,18 @@
+
+
 $(document).ready(function () {
 
     $('body').css('display', 'none').fadeIn(1000);
 })
 
-$("#goBtn").on("click", function (event) {
-    event.preventDefault();
-    loadMap();
-    // var city = $("#destination").val();
+$("#goBtn").click(function (e) {
+    e.preventDefault();
+
+    var addressText = $("#destination").val();
+    console.log(addressText);
+
+
+    loadMap(addressText);
     getWeatherInfo("seattle");
 });
 

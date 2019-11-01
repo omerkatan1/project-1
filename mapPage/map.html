@@ -46,24 +46,17 @@
         <hr />
 
         <h5>Enter Destination</h5>
-        <form>
-            <div class="grid-x grid-padding-x">
-                <div class="large-12 cell">
-                    <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
-                    <a role="button" aria-label="submit form" href="#" id="goBtn" class="button round">Go</a>
-                </div>
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <input type="text" id="destination" placeholder="ex) 123 Destination St. "/>
+                <button id="goBtn" class="button round">Go</button>
             </div>
-        </form>
+        </div>
     </div>
     <div id="myMap" class="map"></div>
     <div class="weatherInfo"></div>
 
 
-
-    <!-- <div id="pageContent">
-        <h1>Weather</h1>
-    </div>
-    <div id="myMap" class="map"></div> -->
 
     <!-- leaflet js routing library -->
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
@@ -75,7 +68,7 @@
     <script src="Assets/startingLocation.js"></script>
 
     <script>
-        function loadMap() {
+        function loadMap(addressText) {
             $(".grid-container").empty();
             console.log("loaded");
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -83,7 +76,8 @@
                 var startLat = position.coords.latitude;
                 var startLong = position.coords.longitude;
 
-                var addressText = "11801 100th ave NE Kirkland, WA";
+
+
                 var key = "eb697c7fa5567b";
                 var forwardGeoURL = "https://us1.locationiq.com/v1/search.php?key=" + key + "&q=" + addressText + "&format=json";
 
