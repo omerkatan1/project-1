@@ -49,7 +49,7 @@ function displayWeatherInfo(weather) {
     if (weather.icon === "Clear") {
         $("#icon").addClass("fas fa-sun");
         $('body').css({
-            backgroundImage : 'url("Assets/Images/sunny.jpg")', 'background-repeat': 'no-repeat', 'background-size': 'cover',
+            backgroundImage : 'url("Assets/Images/sunny.jpg")', 'background-repeat': 'no-repeat',
             class: "backgroundImg"
         });    }
     else if (weather.icon === "Clouds") {
