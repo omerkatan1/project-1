@@ -15,6 +15,12 @@
         integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
         crossorigin=""></script>
 
+    <!-- forwardGeocode.js -->
+    <script src="Assets/geocode.js"></script>
+
+    <!-- style css link -->
+    <link rel="stylesheet" href="Assets/css/mapstyle.css" />
+
     <!-- jQuery link -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -41,22 +47,27 @@
                     <img id="logo"
                       src="Assets/Images/logo.png">
                   </div>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <img id="logo" src="Assets/Images/logo.png">
+            </div>
+        </div>
+
+        <hr />
+
+        <h5>Enter Destination</h5>
+        <form>
+            <div class="grid-x grid-padding-x">
+                <div class="large-12 cell">
+                    <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
+                    <a role="button" aria-label="submit form" href="#" id="goBtn" class="button round">Go</a>
                 </div>
-            
-                <hr />
-            
-                <h5>Enter Destination</h5>
-                <form>
-                  <div class="grid-x grid-padding-x">
-                    <div class="large-12 cell">
-                      <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
-                      <a role="button" aria-label="submit form" href="#" id="goBtn" class="button round">Go</a>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div id="myMap" class="map"></div>
-              <div class="weatherInfo"></div>
+            </div>
+        </form>
+    </div>
+    <div id="myMap" class="map"></div>
+    <div class="weatherInfo"></div>
 
 
 
@@ -69,10 +80,10 @@
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <script src="Assets/leaflet-routing-machine.js"></script>
     <script src="Assets/app.js"></script>
-  <script src="Assets/cameras.js"></script>
-  <script src="Assets/displayWeather.js"></script>
-  <script src="Assets/leaflet-routing-machine.js"></script>
-  <script src="Assets/startingLocation.js"></script>
+    <script src="Assets/cameras.js"></script>
+    <script src="Assets/displayWeather.js"></script>
+    <script src="Assets/leaflet-routing-machine.js"></script>
+    <script src="Assets/startingLocation.js"></script>
 
     <script>
         function displayMapContent () {
@@ -83,25 +94,38 @@
                 var startLat = position.coords.latitude;
                 var startLong = position.coords.longitude;
 
-                console.log($("#destination").val());
+                var addressText = "11801 100th ave NE Kirkland, WA";
+                var key = "eb697c7fa5567b";
+                var forwardGeoURL = "https://us1.locationiq.com/v1/search.php?key=" + key + "&q=" + addressText + "&format=json";
 
-                var mapStartVeiw = L.map('myMap').setView([57.74, 11.94], 12);
+                $.ajax({
+                    url: forwardGeoURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                    var addressLat = response[0].lat;
+                    var addressLon = response[0].lon;
 
-                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: 'pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw'
-                }).addTo(mapStartVeiw);
 
-                L.Routing.control({
-                    waypoints: [
-                        L.latLng(startLat, startLong),
-                        L.latLng(47.44, -122.29)
-                    ],
-                    draggable: false
-                }).addTo(mapStartVeiw);
 
+                    var mapStartVeiw = L.map('myMap').setView([57.74, 11.94], 12);
+
+                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw', {
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        maxZoom: 18,
+                        id: 'mapbox.streets',
+                        accessToken: 'pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw'
+                    }).addTo(mapStartVeiw);
+
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(startLat, startLong),
+                            L.latLng(addressLat, addressLon)
+                        ],
+                        draggable: false
+                    }).addTo(mapStartVeiw);
+
+                });
             });
         }
     </script>
