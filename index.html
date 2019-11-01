@@ -61,8 +61,6 @@
   <div id="myMap" class="map"></div>
   <div class="weatherInfo"></div>
 
-
-
   <!-- leaflet js routing library -->
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
   <script src="Assets/leaflet-routing-machine.js"></script>
@@ -73,18 +71,14 @@
   <script src="Assets/startingLocation.js"></script>
 
   <script>
-
     function loadMap(addressText) {
-
       $(".grid-container").empty();
       console.log("loaded");
+
       navigator.geolocation.getCurrentPosition(function (position) {
         console.log(position.coords.latitude, position.coords.longitude);
         var startLat = position.coords.latitude;
         var startLong = position.coords.longitude;
-
-
-
         var key = "eb697c7fa5567b";
         var forwardGeoURL = "https://us1.locationiq.com/v1/search.php?key=" + key + "&q=" + addressText + "&format=json";
 
@@ -95,9 +89,6 @@
           console.log(response);
           var addressLat = response[0].lat;
           var addressLon = response[0].lon;
-
-
-
           var mapStartVeiw = L.map('myMap').setView([57.74, 11.94], 12);
 
           L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw', {
@@ -120,6 +111,7 @@
         });
       });
     }
+
     function googleStarttView(startLat, startLong) {
       var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
       var googleURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + startLat + "," + startLong + googleKey;
@@ -129,8 +121,8 @@
         method: "GET"
       }).then(function (resp) {
         console.log(resp);
-        
-      })
+
+      });
     }
 
     function googleEndView(addressLat, addressLon) {
@@ -142,8 +134,8 @@
         method: "GET"
       }).then(function (rep) {
         console.log(rep);
-        
-      })
+
+      });
     }
   </script>
 </body>
