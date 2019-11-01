@@ -58,10 +58,18 @@
       </div>
     </div>
   </div>
+
   <div id="myMap" class="map"></div>
   <div class="weatherInfo"></div>
-  <div class="startPic"></div>
-  <div class="endPic"></div>
+
+  <div class="row">
+    <div class="col">
+      <div class="startPic"></div>
+    </div>
+    <div class="col">
+      <div class="endPic"></div>
+    </div>
+  </div>
 
 
 
@@ -73,6 +81,7 @@
   <script src="Assets/displayWeather.js"></script>
   <script src="Assets/leaflet-routing-machine.js"></script>
   <script src="Assets/startingLocation.js"></script>
+  <!-- <script src="js/googleDirections.js"></script> -->
 
   <script>
 
@@ -113,7 +122,9 @@
           getWeatherInfo(addressLat, addressLon);
           googleStartView(startLat, startLong);
           googleEndView(addressLat, addressLon);
-          
+          //Runs from js folder
+          googleDirections(startLat, startLong, addressLat, addressLon);
+
 
         });
       });
@@ -132,7 +143,7 @@
         start.attr("src", googleStartURL);
         $(".startPic").append(start);
       })
-    }
+    };
 
     function googleEndView(addressLat, addressLon) {
       var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
@@ -147,7 +158,19 @@
         end.attr("src", googleEndURL);
         $(".startPic").append(end);
       })
-    }
+    };
+    
+    function googleDirections(startLat, startLong, addressLat, addressLon) {
+    var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
+    var googleDirectionsURL = "https://maps.googleapis.com/maps/api/directions/json?origin=" + startLat + "," + startLong + "&destination=" + addressLat + "," + addressLon + googleKey;
+    $.ajax({
+      url: googleDirectionsURL,
+      method: "GET"
+    }).then(function (res) {
+      console.log("Directions ran");
+      console.log(res);
+  })
+}
   </script>
 </body>
 
