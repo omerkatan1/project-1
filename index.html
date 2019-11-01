@@ -83,8 +83,6 @@
                 var startLat = position.coords.latitude;
                 var startLong = position.coords.longitude;
 
-
-
                 var key = "eb697c7fa5567b";
                 var forwardGeoURL = "https://us1.locationiq.com/v1/search.php?key=" + key + "&q=" + addressText + "&format=json";
 
@@ -115,6 +113,7 @@
                         draggable: false
                     }).addTo(mapStartVeiw);
 
+                    getWeatherInfo(addressLat, addressLon);
                 });
             });
         }
