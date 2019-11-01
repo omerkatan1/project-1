@@ -42,3 +42,6 @@ function displayTopBar() {
 //         appendTo: ".map"
 //     })
 // }
+
+$(document).foundation()
+
