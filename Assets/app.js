@@ -10,11 +10,9 @@ $("#goBtn").click(function (e) {
 
     var addressText = $("#destination").val();
     console.log(addressText);
-
+    displayTopBar();
 
     loadMap(addressText);
-
-    getWeatherInfo("seattle");
 });
 
 function displayTopBar() {
