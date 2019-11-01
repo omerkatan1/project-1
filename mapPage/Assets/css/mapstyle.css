@@ -27,3 +27,11 @@ iframe {
 img { 
     padding: 20%;
 }
+
+.daybody{
+    background-color: palegoldenrod;
+}
+
+.nightbody{
+    background-color: darkslateblue;
+}
