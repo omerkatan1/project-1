@@ -5,22 +5,36 @@ $(document).ready(function () {
 
 $("#goBtn").on("click", function (event) {
     event.preventDefault();
-    loadMap();
+    displayTopBar();
+    displayMapContent();
     // var city = $("#destination").val();
     getWeatherInfo("seattle");
 });
 
-function displayMapContent() {
-    $(".grid-container").empty();
-
-    $("<div>", {
-        html: "hello",
-        appendTo: ".map"
+function displayTopBar() {
+    $("<nav>", {
+        class: "top-bar",
+        appendTo: "#topBar"
     })
-
-    $("<iframe>", {
-        src: "https://maps.google.com/maps?q=seattle&t=&z=13&ie=UTF8&iwloc=&output=embed",
-        class: "framedMap",
-        appendTo: ".map"
+    $("<img />", {
+        src: "Assets/Images/logo.png",
+        alt: "logo",
+        class: "topBarLogo",
+        appendTo: ".top-bar"
     })
 }
+
+// function displayMapContent() {
+//     $(".grid-container").empty();
+
+//     $("<div>", {
+//         html: "hello",
+//         appendTo: ".map"
+//     })
+
+//     $("<iframe>", {
+//         src: "https://maps.google.com/maps?q=seattle&t=&z=13&ie=UTF8&iwloc=&output=embed",
+//         class: "framedMap",
+//         appendTo: ".map"
+//     })
+// }
