@@ -114,8 +114,10 @@
             ],
             draggable: false
           }).addTo(mapStartVeiw);
+          getWeatherInfo(addressLat, addressLon);
           googleStreetView(startLat, startLong);
           googleStreetView(addressLat, addressLon);
+          
 
         });
       });
