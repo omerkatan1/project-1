@@ -2,76 +2,96 @@
 <html>
 
 <head>
-  <title>leaflet map test</title>
-  <meta charset="utf-8" />
+    <title>leaflet map test</title>
+    <meta charset="utf-8" />
 
-  <!-- leaflet css link -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
+    <!-- leaflet css link -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
 
-  <!-- leaflet js link -->
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>
+    <!-- leaflet js link -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
 
-  <!-- forwardGeocode.js -->
-  <script src="Assets/geocode.js"></script>
+    <!-- forwardGeocode.js -->
+    <script src="Assets/geocode.js"></script>
 
-  <!-- style css link -->
-  <link rel="stylesheet" href="Assets/css/mapstyle.css" />
+    <!-- jQuery link -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-  <!-- jQuery link -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- leaflet css routing library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css">
+    <link rel="stylesheet" href="Assets/css/leaflet-routing-machine.css" />
 
-  <!-- leaflet css routing library -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css">
-  <link rel="stylesheet" href="Assets/css/leaflet-routing-machine.css" />
+    <!-- font awesome -->
+    <link rel="stylesheet" href="Assets/css/foundation.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 
-  <!-- font awesome -->
-  <link rel="stylesheet" href="Assets/css/foundation.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-
-  <!-- style css link -->
-  <link rel="stylesheet" href="Assets/css/mapstyle.css" />
+    <!-- style css link -->
+    <link rel="stylesheet" href="Assets/css/mapstyle.css" />
 
 </head>
 
 <body>
-  <div class="contain-to-grid sticky" id="topBar">
-  </div>
-  <div class="grid-container">
-    <div class="grid-x grid-padding-x">
-      <div class="large-12 cell">
-        <img id="logo" src="Assets/Images/logo.png">
-      </div>
+    <div class="contain-to-grid sticky" id="topBar">
     </div>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <img id="logo" src="Assets/Images/logo.png">
+            </div>
+        </div>
 
-    <hr />
+        <hr />
 
-    <h5>Enter Destination</h5>
-    <div class="grid-x grid-padding-x">
-      <div class="large-12 cell">
-        <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
-        <button id="goBtn" class="button round">Go</button>
-      </div>
+        <h5>Enter Destination</h5>
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
+                <button id="goBtn" class="button round">Go</button>
+            </div>
+        </div>
     </div>
   </div>
-
-  <div id="myMap" class="map"></div>
   <div class="weatherInfo"></div>
+  <div id="myMap"></div>
 
   <div class="row">
-    <div class="col">
-      <div class="startPic"></div>
-    </div>
-    <div class="col">
-      <div class="endPic"></div>
+    <div class="columns">
+      <ul class="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion"
+        data-allow-all-closed="true" data-accordion data-multi-expand="true">
+        <li class="accordion-item" data-accordion-item>
+          <a href="#" id="camInfo" class="accordion-title"></a>
+          <!-- Tab Pictures -->
+          <div class='accordion-content' data-tab-content>
+            <ul class="tabs" data-responsive-accordion-tabs="tabs medium-accordion large-tabs"
+              data-allow-all-closed="true" id="example-tabs">
+              <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Start Point</a></li>
+              <li class="tabs-title"><a href="#panel2">Destination</a></li>
+            </ul>
+
+            <div class="tabs-content" data-tabs-content="example-tabs">
+              <div class="tabs-panel is-active" id="panel1">
+                  <div class="startPic"></div>
+              </div>
+              <div class="tabs-panel" id="panel2">
+                  <div class="endPic"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Tab Picture -->
+        </li>
+      </ul>
     </div>
   </div>
 
-
+  <!-- Foundation Scripts-->
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/what-input.js"></script>
+  <script src="js/vendor/foundation.js"></script>
 
   <!-- leaflet js routing library -->
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
@@ -132,6 +152,9 @@
           googleDirections(startLat, startLong, addressLat, addressLon);
 
 
+          //Camera name information display
+          $(".accordian-title").text("Camera Information");
+
         });
       });
     }
@@ -162,7 +185,7 @@
         console.log("end pic");
         var end = $("<img>");
         end.attr("src", googleEndURL);
-        $(".startPic").append(end);
+        $(".endPic").append(end);
       })
     };
 
@@ -175,6 +198,15 @@
       }).then(function (res) {
         console.log("Directions ran");
         console.log(res);
+
+        // Array of directions
+        var directionSteps = res.routes[0].legs[0].steps;
+        console.log(directionSteps);
+        // Parse through array to retrieve lat + lng
+        for (i=0; i < directionSteps.length; i++) {
+        console.log(directionSteps[i].end_location.lat + "," + directionSteps[i].end_location.lng);
+        }
+    
       })
     }
   </script>
