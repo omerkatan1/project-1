@@ -60,10 +60,40 @@
   </div>
   <div id="myMap" class="map"></div>
   <div class="weatherInfo"></div>
-  <div class="startPic"></div>
-  <div class="endPic"></div>
 
+  <div class="row">
+    <div class="columns">
+      <ul class="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion"
+        data-allow-all-closed="true" data-accordion data-multi-expand="true">
+        <li class="accordion-item" data-accordion-item>
+          <a href="#" class="accordion-title">Camera Information:</a>
+          <!-- Tab Pictures -->
+          <div class='accordion-content' data-tab-content>
+            <ul class="tabs" data-responsive-accordion-tabs="tabs medium-accordion large-tabs"
+              data-allow-all-closed="true" id="example-tabs">
+              <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Start Point</a></li>
+              <li class="tabs-title"><a href="#panel2">Destination</a></li>
+            </ul>
 
+            <div class="tabs-content" data-tabs-content="example-tabs">
+              <div class="tabs-panel is-active" id="panel1">
+                  <div class="startPic"></div>
+              </div>
+              <div class="tabs-panel" id="panel2">
+                  <div class="endPic"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Tab Picture -->
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Foundation Scripts-->
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/what-input.js"></script>
+  <script src="js/vendor/foundation.js"></script>
 
   <!-- leaflet js routing library -->
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
@@ -145,7 +175,7 @@
         console.log("end pic");
         var end = $("<img>");
         end.attr("src", googleEndURL);
-        $(".startPic").append(end);
+        $(".endPic").append(end);
       })
     }
   </script>
