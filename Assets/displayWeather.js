@@ -1,9 +1,9 @@
 var APIKey = "166a433c57516f51dfab1f7edaed8413";
 
-function getWeatherInfo(city) {
-    console.log(city);
+function getWeatherInfo(addressLat, addressLon) {
+    console.log(addressLat, addressLon);
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=" + city + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=" + APIKey + "&lat=" + addressLat + "&lon=" + addressLon;
 
     $.ajax({
         url: queryURL,
