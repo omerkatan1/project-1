@@ -47,24 +47,6 @@ function displayWeatherInfo(weather) {
         appendTo: ".weatherInfo"
     })
 
-    //start point of time based background
-
-    //may need to be altered if the trip crosses time zones
-    var curhour = (new Date()).getHours();
-    // returns information based on 24 hour clock
-    //getSRSS(weather.lat, weather.lon);
-    var sunrise = 7;
-    var daylength = 10;
-    var sunset = sunrise + daylength;
-    if(curhour >= sunrise && curhour<= sunset){
-        $(".weatherInfo").removeClass("nightbody").addClass("daybody");
-    } else {
-        $(".weatherInfo").removeClass("daybody").addClass("nightbody");
-    }
-
-    //end point of time based background
-
-
 
     if (weather.icon === "Clear") {
         $("#icon").addClass("fas fa-sun");
@@ -96,18 +78,18 @@ function getSRSS(lat, lng) {
         console.log("Sunrise:" + response.results.sunrise);
         console.log("Sunset:" + response.results.sunset);
 
-        // api seems to return inaccurate data, future versions will use a different api or program for correction along the following design.
+        // api seems to return inaccurate data, future versions will use a different api,
+        // all values returned by api are behind by 5 hours, correction for this is error margin
         // also add minute determination for greater accuraccy.
-        /*
+        var errorMargin = 5;
         var curhour = (new Date()).getHours();
-        var sunrise = response.results.sunrise[0];
+        var sunrise = errorMargin + response.results.sunrise[0];
         var sunset = sunrise + response.results.day_length[1];
         if(curhour >= sunrise && curhour<= sunset){
             $(".weatherInfo").removeClass("nightbody").addClass("daybody");
         } else {
             $(".weatherInfo").removeClass("daybody").addClass("nightbody");
         }
-         */
 
     })
 }
