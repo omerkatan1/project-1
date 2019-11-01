@@ -20,7 +20,7 @@ function getWeatherInfo(addressLat, addressLon) {
             lat: response.coord.lat,
             lon: response.coord.lon,
         }
- 
+
         displayWeatherInfo(weather);
     })
 }
@@ -47,16 +47,17 @@ function displayWeatherInfo(weather) {
         appendTo: ".weatherInfo"
     })
 
-        //dynamic day/night function call begin
-        getSRSS(weather.lat,weather.lon);
-        //dynamic day/night function call end  
+    //dynamic day/night function call begin
+    getSRSS(weather.lat, weather.lon);
+    //dynamic day/night function call end  
 
     if (weather.icon === "Clear") {
         $("#icon").addClass("fas fa-sun");
         $('body').css({
-            backgroundImage : 'url("Assets/Images/sunny.jpg")', 'background-repeat': 'no-repeat',
+            backgroundImage: 'url("Assets/Images/sunny.jpg")', 'background-repeat': 'no-repeat',
             class: "backgroundImg"
-        });    }
+        });
+    }
     else if (weather.icon === "Clouds") {
         $("#icon").addClass("fas fa-cloud");
     }
@@ -91,7 +92,7 @@ function getSRSS(lat, lng) {
         var curhour = (new Date()).getHours();
         var sunrise = errorMargin + response.results.sunrise[0];
         var sunset = sunrise + response.results.day_length[1];
-        if(curhour >= sunrise && curhour<= sunset){
+        if (curhour >= sunrise && curhour <= sunset) {
             $(".weatherInfo").removeClass("nightbody").addClass("daybody");
         } else {
             $(".weatherInfo").removeClass("daybody").addClass("nightbody");

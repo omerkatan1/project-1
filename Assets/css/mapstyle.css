@@ -49,3 +49,10 @@ iframe {
     width: 100px;
 }
 
+.daybody {
+    background-color: palegoldenrod;
+}
+
+.nightbody {
+    background-color: darkslateblue;
+}
