@@ -33,9 +33,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 
+    <!-- style css link -->
+    <link rel="stylesheet" href="Assets/css/mapstyle.css" />
+
 </head>
 
 <body>
+    <div class="contain-to-grid sticky" id="topBar">
+    </div>
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
@@ -68,7 +73,9 @@
     <script src="Assets/startingLocation.js"></script>
 
     <script>
+
         function loadMap(addressText) {
+
             $(".grid-container").empty();
             console.log("loaded");
             navigator.geolocation.getCurrentPosition(function (position) {
