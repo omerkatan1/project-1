@@ -48,6 +48,11 @@ function displayWeatherInfo(weather) {
     })
 
 
+    //dynamic day/night function call begin
+    getSRSS(weather.lat,weather.lon);
+    //dynamic day/night function call end   
+
+
     if (weather.icon === "Clear") {
         $("#icon").addClass("fas fa-sun");
     }
