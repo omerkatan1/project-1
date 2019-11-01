@@ -23,7 +23,7 @@ h2 {
     width: 90%;
     height: 80%;
     border: none;
-    margin: auto;
+    margin: 5%;
     border-radius: 5px;
 }
 /* #pageContent {
@@ -67,6 +67,7 @@ iframe {
 
 .weatherInfo {
     display: inline-block;
+    margin-top: 20px;
 }
 
 #icon {
@@ -77,5 +78,4 @@ iframe {
 
 .leaflet-container {
     box-shadow: 0px 0px 6px 1px rgba(130,130,130,1);
-
 }
