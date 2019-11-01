@@ -2,153 +2,148 @@
 <html>
 
 <head>
-  <title>leaflet map test</title>
-  <meta charset="utf-8" />
+    <title>leaflet map test</title>
+    <meta charset="utf-8" />
 
-  <!-- leaflet css link -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
+    <!-- leaflet css link -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
 
-  <!-- leaflet js link -->
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>
+    <!-- leaflet js link -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
 
-  <!-- forwardGeocode.js -->
-  <script src="Assets/geocode.js"></script>
+    <!-- forwardGeocode.js -->
+    <script src="Assets/geocode.js"></script>
 
-  <!-- style css link -->
-  <link rel="stylesheet" href="Assets/css/mapstyle.css" />
+    <!-- jQuery link -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-  <!-- jQuery link -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- leaflet css routing library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css">
+    <link rel="stylesheet" href="Assets/css/leaflet-routing-machine.css" />
 
-  <!-- leaflet css routing library -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css">
-  <link rel="stylesheet" href="Assets/css/leaflet-routing-machine.css" />
+    <!-- font awesome -->
+    <link rel="stylesheet" href="Assets/css/foundation.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 
-  <!-- font awesome -->
-  <link rel="stylesheet" href="Assets/css/foundation.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-
-  <!-- style css link -->
-  <link rel="stylesheet" href="Assets/css/mapstyle.css" />
+    <!-- style css link -->
+    <link rel="stylesheet" href="Assets/css/mapstyle.css" />
 
 </head>
 
 <body>
-  <div class="contain-to-grid sticky" id="topBar">
-  </div>
-  <div class="grid-container">
-    <div class="grid-x grid-padding-x">
-      <div class="large-12 cell">
-        <img id="logo" src="Assets/Images/logo.png">
-      </div>
+    <div class="contain-to-grid sticky" id="topBar">
     </div>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <img id="logo" src="Assets/Images/logo.png">
+            </div>
+        </div>
 
-    <hr />
+        <hr />
 
-    <h5>Enter Destination</h5>
-    <div class="grid-x grid-padding-x">
-      <div class="large-12 cell">
-        <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
-        <button id="goBtn" class="button round">Go</button>
-      </div>
+        <h5>Enter Destination</h5>
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
+                <button id="goBtn" class="button round">Go</button>
+            </div>
+        </div>
     </div>
-  </div>
-  <div id="myMap" class="map"></div>
-  <div class="weatherInfo"></div>
-  <div class="startPic"></div>
-  <div class="endPic"></div>
+    <div class="weatherInfo"></div>
+    <div id="myMap"></div>
+    <div class="startPic"></div>
+    <div class="endPic"></div>
+
+    <!-- leaflet js routing library -->
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="Assets/leaflet-routing-machine.js"></script>
+    <script src="Assets/app.js"></script>
+    <script src="Assets/cameras.js"></script>
+    <script src="Assets/displayWeather.js"></script>
+    <script src="Assets/leaflet-routing-machine.js"></script>
+    <script src="Assets/startingLocation.js"></script>
+
+    <script>
+
+        function loadMap(addressText) {
+
+            $(".grid-container").empty();
+            console.log("loaded");
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log(position.coords.latitude, position.coords.longitude);
+                var startLat = position.coords.latitude;
+                var startLong = position.coords.longitude;
+                var key = "eb697c7fa5567b";
+                var forwardGeoURL = "https://us1.locationiq.com/v1/search.php?key=" + key + "&q=" + addressText + "&format=json";
+
+                $.ajax({
+                    url: forwardGeoURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                    var addressLat = response[0].lat;
+                    var addressLon = response[0].lon;
+                    var mapStartVeiw = L.map('myMap').setView([57.74, 11.94], 12);
+
+                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw', {
+                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                        maxZoom: 18,
+                        id: 'mapbox.streets',
+                        accessToken: 'pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw'
+                    }).addTo(mapStartVeiw);
+
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(startLat, startLong),
+                            L.latLng(addressLat, addressLon)
+                        ],
+                        draggable: false
+                    }).addTo(mapStartVeiw);
+                    getWeatherInfo(addressLat, addressLon);
+                    googleStartView(startLat, startLong);
+                    googleEndView(addressLat, addressLon);
 
 
+                });
+            });
+        }
 
-  <!-- leaflet js routing library -->
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-  <script src="Assets/leaflet-routing-machine.js"></script>
-  <script src="Assets/app.js"></script>
-  <script src="Assets/cameras.js"></script>
-  <script src="Assets/displayWeather.js"></script>
-  <script src="Assets/leaflet-routing-machine.js"></script>
-  <script src="Assets/startingLocation.js"></script>
+        function googleStartView(startLat, startLong) {
+            var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
+            var googleStartURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + startLat + "," + startLong + googleKey;
 
-  <script>
+            $.ajax({
+                url: googleStartURL,
+                method: "GET"
+            }).then(function (resp) {
+                console.log("start pic");
+                var start = $("<img>");
+                start.attr("src", googleStartURL);
+                $(".startPic").append(start);
+            })
+        }
 
-    function loadMap(addressText) {
+        function googleEndView(addressLat, addressLon) {
+            var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
+            var googleEndURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + addressLat + "," + addressLon + googleKey;
 
-      $(".grid-container").empty();
-      console.log("loaded");
-      navigator.geolocation.getCurrentPosition(function (position) {
-        console.log(position.coords.latitude, position.coords.longitude);
-        var startLat = position.coords.latitude;
-        var startLong = position.coords.longitude;
-        var key = "eb697c7fa5567b";
-        var forwardGeoURL = "https://us1.locationiq.com/v1/search.php?key=" + key + "&q=" + addressText + "&format=json";
-
-        $.ajax({
-          url: forwardGeoURL,
-          method: "GET"
-        }).then(function (response) {
-          console.log(response);
-          var addressLat = response[0].lat;
-          var addressLon = response[0].lon;
-          var mapStartVeiw = L.map('myMap').setView([57.74, 11.94], 12);
-
-          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: 'pk.eyJ1Ijoib21lcmthdGFuIiwiYSI6ImNrMjd6c3lxeTFyaTAzbXBocjM2aG5udjYifQ.Z2PQjDqh2ryOGOWpKWv1Gw'
-          }).addTo(mapStartVeiw);
-
-          L.Routing.control({
-            waypoints: [
-              L.latLng(startLat, startLong),
-              L.latLng(addressLat, addressLon)
-            ],
-            draggable: false
-          }).addTo(mapStartVeiw);
-          getWeatherInfo(addressLat, addressLon);
-          googleStartView(startLat, startLong);
-          googleEndView(addressLat, addressLon);
-          
-
-        });
-      });
-    }
-
-    function googleStartView(startLat, startLong) {
-      var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
-      var googleStartURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + startLat + "," + startLong + googleKey;
-
-      $.ajax({
-        url: googleStartURL,
-        method: "GET"
-      }).then(function (resp) {
-        console.log("start pic");
-        var start = $("<img>");
-        start.attr("src", googleStartURL);
-        $(".startPic").append(start);
-      })
-    }
-
-    function googleEndView(addressLat, addressLon) {
-      var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
-      var googleEndURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + addressLat + "," + addressLon + googleKey;
-
-      $.ajax({
-        url: googleEndURL,
-        method: "GET"
-      }).then(function (rep) {
-        console.log("end pic");
-        var end = $("<img>");
-        end.attr("src", googleEndURL);
-        $(".startPic").append(end);
-      })
-    }
-  </script>
+            $.ajax({
+                url: googleEndURL,
+                method: "GET"
+            }).then(function (rep) {
+                console.log("end pic");
+                var end = $("<img>");
+                end.attr("src", googleEndURL);
+                $(".startPic").append(end);
+            })
+        }
+    </script>
 </body>
 
 </html>
