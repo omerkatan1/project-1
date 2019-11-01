@@ -60,6 +60,10 @@
   </div>
   <div id="myMap" class="map"></div>
   <div class="weatherInfo"></div>
+  <div class="startPic"></div>
+  <div class="endPic"></div>
+
+
 
   <!-- leaflet js routing library -->
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
@@ -71,10 +75,11 @@
   <script src="Assets/startingLocation.js"></script>
 
   <script>
+
     function loadMap(addressText) {
+
       $(".grid-container").empty();
       console.log("loaded");
-
       navigator.geolocation.getCurrentPosition(function (position) {
         console.log(position.coords.latitude, position.coords.longitude);
         var startLat = position.coords.latitude;
@@ -106,38 +111,42 @@
             draggable: false
           }).addTo(mapStartVeiw);
           getWeatherInfo(addressLat, addressLon);
-          googleStreetView(startLat, startLong);
-          googleStreetView(addressLat, addressLon);
+          googleStartView(startLat, startLong);
+          googleEndView(addressLat, addressLon);
           
 
         });
       });
     }
 
-    function googleStarttView(startLat, startLong) {
+    function googleStartView(startLat, startLong) {
       var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
-      var googleURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + startLat + "," + startLong + googleKey;
+      var googleStartURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + startLat + "," + startLong + googleKey;
 
       $.ajax({
-        url: googleURL,
+        url: googleStartURL,
         method: "GET"
       }).then(function (resp) {
-        console.log(resp);
-
-      });
+        console.log("start pic");
+        var start = $("<img>");
+        start.attr("src", googleStartURL);
+        $(".startPic").append(start);
+      })
     }
 
     function googleEndView(addressLat, addressLon) {
       var googleKey = "&key=AIzaSyB-VF7nGUXZizMU85BJnAQ06Qg_acuZYJw";
-      var googleURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + addressLat + "," + addressLon + googleKey;
+      var googleEndURL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=" + addressLat + "," + addressLon + googleKey;
 
       $.ajax({
-        url: googleURL,
+        url: googleEndURL,
         method: "GET"
       }).then(function (rep) {
-        console.log(rep);
-
-      });
+        console.log("end pic");
+        var end = $("<img>");
+        end.attr("src", googleEndURL);
+        $(".startPic").append(end);
+      })
     }
   </script>
 </body>
