@@ -16,7 +16,9 @@ function getWeatherInfo(addressLat, addressLon) {
             tempHigh: response.main.temp_max.toFixed(1),
             tempLow: response.main.temp_min.toFixed(1),
             wind: response.wind.speed.toFixed(1),
-            icon: response.weather[0].main
+            icon: response.weather[0].main,
+            lat: response.coord.lat,
+            lon: response.coord.lon,
         }
  
         displayWeatherInfo(weather);
@@ -45,6 +47,9 @@ function displayWeatherInfo(weather) {
         appendTo: ".weatherInfo"
     })
 
+        //dynamic day/night function call begin
+        getSRSS(weather.lat,weather.lon);
+        //dynamic day/night function call end  
 
     if (weather.icon === "Clear") {
         $("#icon").addClass("fas fa-sun");
@@ -64,4 +69,33 @@ function displayWeatherInfo(weather) {
     else if (weather.icon === "Rain") {
         $("#icon").addClass("fas fa-cloud-showers-heavy");
     }
+}
+
+function getSRSS(lat, lng) {
+    var queryURL = "https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + lng;
+    console.log("latitude:" + lat);
+    console.log("longitude:" + lng);
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        console.log("Sunrise:" + response.results.sunrise);
+        console.log("Sunset:" + response.results.sunset);
+
+        // api seems to return inaccurate data, future versions will use a different api,
+        // all values returned by api are behind by 5 hours, correction for this is error margin
+        // also add minute determination for greater accuraccy.
+        var errorMargin = 5;
+        var curhour = (new Date()).getHours();
+        var sunrise = errorMargin + response.results.sunrise[0];
+        var sunset = sunrise + response.results.day_length[1];
+        if(curhour >= sunrise && curhour<= sunset){
+            $(".weatherInfo").removeClass("nightbody").addClass("daybody");
+        } else {
+            $(".weatherInfo").removeClass("daybody").addClass("nightbody");
+        }
+
+    })
 }
