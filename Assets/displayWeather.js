@@ -13,8 +13,7 @@ function getWeatherInfo(addressLat, addressLon) {
 
         var weather = {
             city: response.name,
-            tempHigh: response.main.temp_max.toFixed(1),
-            tempLow: response.main.temp_min.toFixed(1),
+            temp: response.main.temp.toFixed(1),
             wind: response.wind.speed.toFixed(1),
             icon: response.weather[0].main,
             lat: response.coord.lat,
@@ -27,72 +26,81 @@ function getWeatherInfo(addressLat, addressLon) {
 
 function displayWeatherInfo(weather) {
     $("<div>", {
-        html: "<h2>" + weather.city + "</h2>",
-        id: "icon",
-        class: "city",
-        appendTo: ".weatherInfo"
-    })
-    // $("<div>", {
-    //     id: "icon",
-    //     appendTo: ".weatherInfo"
-    // })
-    $("<div>", {
-        html: "<p>" + weather.tempHigh + " / " + weather.tempLow + " °F" + "</p>",
+        html: weather.temp + " °F",
         class: "temp",
-        appendTo: ".weatherInfo"
+        appendTo: ".top-bar"
     })
     $("<div>", {
-        html: "<p>" + "Wind Speed: " + weather.wind + " MPH" + "</p>",
-        class: "wind",
-        appendTo: ".weatherInfo"
+        id: "icon",
+        appendTo: ".top-bar"
+    })
+    $("<div>", {
+        html: weather.city,
+        class: "city",
+        appendTo: ".top-bar"
     })
 
     //dynamic day/night function call begin
-    getSRSS(weather.lat, weather.lon);
+    // getSRSS(weather.lat, weather.lon);
     //dynamic day/night function call end  
 
     if (weather.icon === "Clear") {
-        $("#icon").addClass("fas fa-sun");
-    }
+        $("<img>", {
+            src: "Assets/Images/sun.png",
+            class: "icon",
+            appendTo: "#icon"
+        })}
     else if (weather.icon === "Clouds") {
-        $("#icon").addClass("fas fa-cloud");
-    }
+        $("<img>", {
+        src: "Assets/Images/cloudy.png",
+        class: "icon",
+        appendTo: "#icon"
+    })}
     else if (weather.icon === "Snow") {
-        $("#icon").addClass("fas fa-snowflake");
-    }
+        $("<img>", {
+            src: "Assets/Images/snowing.png",
+            class: "icon",
+            appendTo: "#icon"
+        })}
     else if (weather.icon === "Drizzle") {
-        $("#icon").addClass("fas fa-cloud-rain");
-    }
+        $("<img>", {
+            src: "Assets/Images/drizzle.png",
+            class: "icon",
+            appendTo: "#icon"
+        })}
     else if (weather.icon === "Rain") {
-        $("#icon").addClass("fas fa-cloud-showers-heavy");
-    }
+        $("<img>", {
+            src: "Assets/Images/rain.png",
+            class: "icon",
+            appendTo: "#icon"
+        })}
 }
 
-function getSRSS(lat, lng) {
-    var queryURL = "https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + lng;
-    console.log("latitude:" + lat);
-    console.log("longitude:" + lng);
+// function getSRSS(lat, lng) {
+//     var queryURL = "https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + lng;
+//     console.log("latitude:" + lat);
+//     console.log("longitude:" + lng);
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-        console.log("Sunrise:" + response.results.sunrise);
-        console.log("Sunset:" + response.results.sunset);
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//     }).then(function (response) {
+//         console.log(response);
+//         console.log("Sunrise:" + response.results.sunrise);
+//         console.log("Sunset:" + response.results.sunset);
 
-        // api seems to return inaccurate data, future versions will use a different api,
-        // all values returned by api are behind by 5 hours, correction for this is error margin
-        // also add minute determination for greater accuraccy.
-        var errorMargin = 5;
-        var curhour = (new Date()).getHours();
-        var sunrise = errorMargin + response.results.sunrise[0];
-        var sunset = sunrise + response.results.day_length[1];
-        if (curhour >= sunrise && curhour <= sunset) {
-            $(".top-bar").removeClass("nightbody").addClass("daybody");
-        } else {
-            $(".top-bar").removeClass("daybody").addClass("nightbody");
-        }
+//         // api seems to return inaccurate data, future versions will use a different api,
+//         // all values returned by api are behind by 5 hours, correction for this is error margin
+//         // also add minute determination for greater accuraccy.
+//         var errorMargin = 5;
+//         var curhour = (new Date()).getHours();
+//         var sunrise = errorMargin + response.results.sunrise[0];
+//         var sunset = sunrise + response.results.day_length[1];
+//         if (curhour >= sunrise && curhour <= sunset) {
+//             $(".top-bar").removeClass("nightbody").addClass("daybody");
+//         } else {
+//             $(".top-bar").removeClass("daybody").addClass("nightbody");
+//         }
 
-    })
-}
+//     })
+// }
