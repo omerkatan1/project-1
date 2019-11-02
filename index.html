@@ -37,11 +37,12 @@
 
 <body>
     <div class="contain-to-grid sticky" id="topBar">
+      <nav class="top-bar"></nav>
     </div>
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
-                <img id="logo" src="Assets/Images/logo.png">
+                <img id="logo" src="Assets/Images/map.png">
             </div>
         </div>
 
@@ -50,14 +51,14 @@
         <h5>Enter Destination</h5>
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
-                <input type="text" id="destination" placeholder="ex) 123 Destination St. " />
-                <button id="goBtn" class="button round">Go</button>
+                <input type="text" id="destination" placeholder="123 Destination St. " />
+                <button id="goBtn">Route</button>
             </div>
         </div>
     </div>
   </div>
-  <div class="weatherInfo"></div>
   <div id="myMap"></div>
+  <div class="weatherInfo"></div>
 
   <div class="row">
     <div class="columns">
@@ -143,7 +144,7 @@
           googleEndView(addressLat, addressLon);
 
           //Camera name information display
-          $(".accordian-title").text("Camera Information");
+          $(".accordion-title").text("Camera Information");
 
         });
       });

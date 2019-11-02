@@ -16,10 +16,6 @@ $("#goBtn").click(function (e) {
 });
 
 function displayTopBar() {
-    $("<nav>", {
-        class: "top-bar",
-        appendTo: "#topBar"
-    })
     $("<img />", {
         src: "Assets/Images/logo.png",
         alt: "logo",
